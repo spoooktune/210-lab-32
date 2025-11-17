@@ -5,7 +5,7 @@
 #include "Car.h"
 
 using namespace std;
-const int PAYS_TOLL = 55;
+const int PAYS_TOLL = 50;
 
 int main(){
     srand(time(0));
@@ -28,28 +28,34 @@ int main(){
     for (int i = 0; i < 20; ){
         cout << "Period " << i + 1 << endl;
         for (int x = 0; x < 4; x++){
+            cout << "> Lane " << x + 1 << endl;
+            deque<Car> carQ = carPlaza[x];
             r = rand() % 100 + 1;
             if (r <= PAYS_TOLL){
-                cout << "Car paid: ";
+                cout << "   Car paid: ";
                 carQ.front().print();
                 carQ.pop_front();
             }
             else if (r > PAYS_TOLL){
                 Car temp;
-                cout << "Car joined lane: ";
+                cout << "   Car joined lane: ";
                 temp.print();
                 carQ.push_back(temp);
             }
         }
-        /*
+        
         cout << "Queue: " << endl;
-        if (carQ.empty()){
-            cout << "> Queue is empty" << endl;
-        }
-        else{
-            for (Car c : carQ){
-                cout << "> ";
-                c.print();
+        for (int x = 0; x < 4; x++){
+            deque<Car> carQ = carPlaza[x];
+            cout << "> Lane " << x + 1 << endl;
+            if (carQ.empty()){
+                cout << "   Lane is empty" << endl;
+            }
+            else{
+                for (Car c : carQ){
+                    cout << "   ";
+                    c.print();
+                }
             }
         }
         cout << endl;
