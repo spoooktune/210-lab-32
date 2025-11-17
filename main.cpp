@@ -25,23 +25,28 @@ int main(){
     }
     cout << endl;
     int r = 0;
+    // 20 days
     for (int i = 0; i < 20; i++){
         cout << "Period " << i + 1 << endl;
+        // 4 lanes
         for (int x = 0; x < 4; x++){
             cout << "> Lane " << x + 1 << endl;
             deque<Car> * carQ = &carPlaza[x];
             r = rand() % 100 + 1;
+            // car pays toll
             if (r <= PAYS_TOLL && !carQ->empty()){
                 cout << "   Car paid: ";
                 carQ->front().print();
                 carQ->pop_front();
             }
+            // car joins queue
             else if (r > PAYS_TOLL && r <= JOIN_Q){
                 Car temp;
                 cout << "   Car joined lane: ";
                 carQ->push_back(temp);
                 carQ->back().print();
             }
+            // car changes lanes
             else if (r > JOIN_Q && !carQ->empty()){
                 int laneC = rand() % 3;
                 // if laneC is same as current lane
@@ -55,9 +60,20 @@ int main(){
                 cout << "   Car moved to Lane " << laneC + 1 << ": ";
                 temp.print();
             }
+            // only happens if lane is empty and nothing else has happened
+            else{
+                r = rand() % 100 + 1;
+                if (r <= 50){
+                    Car temp;
+                    cout << "   Car joined lane: ";
+                    carQ->push_back(temp);
+                    carQ->back().print();
+                } 
+            }
         }
         cout << endl;
         
+        // outputs queue for all lanes
         cout << "Queue: " << endl;
         for (int x = 0; x < 4; x++){
             deque<Car> carQ = carPlaza[x];
@@ -74,6 +90,5 @@ int main(){
         }
         cout << endl;
     }
-    //*/
     return 0;
 }
