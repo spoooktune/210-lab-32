@@ -9,7 +9,16 @@ const int PAYS_TOLL = 55;
 
 int main(){
     srand(time(0));
+    // testing if array of deques functions
     array<deque<Car>, 4> carPlaza;
+    Car temp;
+    carPlaza[0].push_back(temp);
+    carPlaza[0].front().print();
+    Car temp2;
+    carPlaza[1].push_back(temp2);
+    carPlaza[1].front().print();
+
+    /*
     cout << "Initial Queue: " << endl;
     for (int i = 0; i < 2; i++){
         Car temp;
@@ -46,6 +55,6 @@ int main(){
             }
         }
         cout << endl;
-    }
+    }*/
     return 0;
 }
