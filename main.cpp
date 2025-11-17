@@ -5,7 +5,7 @@
 #include "Car.h"
 
 using namespace std;
-const int PAYS_TOLL = 50;
+const int PAYS_TOLL = 46, JOIN_Q = 39 + PAYS_TOLL;
 
 int main(){
     srand(time(0));
@@ -36,11 +36,24 @@ int main(){
                 carQ->front().print();
                 carQ->pop_front();
             }
-            else if (r > PAYS_TOLL){
+            else if (r > PAYS_TOLL && r <= JOIN_Q){
                 Car temp;
                 cout << "   Car joined lane: ";
                 carQ->push_back(temp);
                 carQ->back().print();
+            }
+            else if (r > JOIN_Q && !carQ->empty()){
+                int laneC = rand() % 3;
+                // if laneC is same as current lane
+                while (laneC == x){
+                    // get another num for laneC until diff from x
+                    laneC = rand() % 3;
+                }
+                Car temp = carQ->back();
+                carPlaza[laneC].push_back(temp);
+                carQ->pop_back();
+                cout << "   Car moved to Lane " << laneC + 1 << ": ";
+                temp.print();
             }
         }
         cout << endl;
